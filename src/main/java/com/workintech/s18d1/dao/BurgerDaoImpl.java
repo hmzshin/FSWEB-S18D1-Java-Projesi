@@ -45,12 +45,15 @@ public class BurgerDaoImpl implements BurgerDao {
         return burger;
     }
 
+    @Transactional
     @Override
-    public Burger update(Burger burger) {
+    public Burger update(Burger burger, Long id) {
+        burger.setId(id);
         entityManager.merge(burger);
         return burger;
     }
 
+    @Transactional
     @Override
     public Burger remove(Long id) {
         Burger existingBurger = findById(id);
@@ -61,7 +64,7 @@ public class BurgerDaoImpl implements BurgerDao {
     @Override
     public List<Burger> findByPrice(Double price) {
         TypedQuery<Burger> findByPrice = entityManager.createQuery(
-                "SELECT b FROM Burger b WHERE b.price>: price ORDER BY b.price desc",
+                "SELECT b FROM Burger b WHERE b.price > :price ORDER BY b.price desc",
                 Burger.class);
 
         findByPrice.setParameter("price", price);
@@ -72,9 +75,10 @@ public class BurgerDaoImpl implements BurgerDao {
     @Override
     public List<Burger> findByBreadType(BreadType breadType) {
         TypedQuery<Burger> findByBreadType = entityManager
-                .createQuery("SELECT b FROM Burger b WHERE b.breadType=:breadType ORDER BY b.name desc", Burger.class);
+                .createQuery("SELECT b FROM Burger b WHERE b.breadType = :breadType ORDER BY b.name desc",
+                        Burger.class);
 
-        findByBreadType.setParameter("breadType", findByBreadType);
+        findByBreadType.setParameter("breadType", breadType);
 
         return findByBreadType.getResultList();
 

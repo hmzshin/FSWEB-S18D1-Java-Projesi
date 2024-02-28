@@ -7,12 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @SuppressWarnings("null")
     @ExceptionHandler
     public ResponseEntity<ExceptionResponse> burgerExceptionHandler(BurgerException burgerException) {
+        log.error("Burger exception occurred", burgerException.getMessage());
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(burgerException.getHttpStatus(),
                 burgerException.getMessage(), LocalDateTime.now());
@@ -22,6 +26,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<ExceptionResponse> globalExceptionHandler(Exception exception) {
+        log.error("Unexpected error occurred", exception.getMessage());
         ExceptionResponse exceptionResponse = new ExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 exception.getMessage(),
                 LocalDateTime.now());

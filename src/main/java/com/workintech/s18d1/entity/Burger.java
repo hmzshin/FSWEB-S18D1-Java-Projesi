@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "burger", schema = "s18d1")
-
 public class Burger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

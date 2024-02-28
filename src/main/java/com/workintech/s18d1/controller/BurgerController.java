@@ -47,8 +47,8 @@ public class BurgerController {
     }
 
     @PutMapping("/{id}")
-    public Burger update(@PathVariable("id") Burger id, @RequestBody Burger burger) {
-        return burgerDao.update(burger);
+    public Burger update(@PathVariable("id") Long id, @RequestBody Burger burger) {
+        return burgerDao.update(burger, id);
     }
 
     @DeleteMapping("/{id}")

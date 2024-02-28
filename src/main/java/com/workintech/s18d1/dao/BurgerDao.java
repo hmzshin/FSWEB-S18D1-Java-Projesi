@@ -12,7 +12,7 @@ public interface BurgerDao {
 
     Burger findById(Long id);
 
-    Burger update(Burger burger);
+    Burger update(Burger burger, Long id);
 
     Burger remove(Long id);
 
