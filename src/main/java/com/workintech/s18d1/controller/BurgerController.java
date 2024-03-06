@@ -2,6 +2,7 @@ package com.workintech.s18d1.controller;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
